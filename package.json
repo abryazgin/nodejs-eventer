@@ -1,0 +1,27 @@
+{
+  "name": "eventer",
+  "version": "0.0.0",
+  "description": "Event handler app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bryazginnn/nodejs-eventer.git"
+  },
+  "keywords": [
+    "nodejs",
+    "event"
+  ],
+  "author": "abryazgin",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/bryazginnn/nodejs-eventer/issues"
+  },
+  "dependencies": {
+    "express": "~4.14.0",
+    "winston": "~2.2.0",
+    "mocha": "~3.0.2"
+  }
+}
