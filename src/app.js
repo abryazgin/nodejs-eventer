@@ -1,18 +1,24 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 
-var log = require('./base/logger')(module);
-var handlers = require('./base/handler');
-var routes = require('./routes');
+var Config = require('./config');
+var Logger = require('./base/logger')(module);
+var Handlers = require('./base/handler');
+var Routes = require('./routes');
 
 var app = express();
 
-var port = 8000;
+var port = Config.port;
 
-routes(app);
+app.use(bodyParser.json());
 
-app.use(handlers.handler404);
-app.use(handlers.handler500);
+Routes(app);
 
-app.listen(port, function(){
-    log.info('Server started on port',port);
+app.use(Handlers.handler404);
+app.use(Handlers.handler500);
+
+var server = app.listen(port, function(){
+    Logger.info('Server started on port',port);
 });
+
+module.exports = server;
