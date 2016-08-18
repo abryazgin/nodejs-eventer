@@ -1,5 +1,4 @@
 var assert = require('assert');
-var db = require('./../base/db');
 
 describe('Testing tests', function() {
 
@@ -10,17 +9,5 @@ describe('Testing tests', function() {
         });
 
     });
-
-    // describe('mongodb', function (){
-    //     db.addSubscriber(
-    //         {
-    //             event: 'SomeEvent',
-    //             callback: 'localhost:8000/test/callback'
-    //         },
-    //         function(result){
-    //             console.log('Result', result);
-    //         });
-    //
-    // })
 
 });

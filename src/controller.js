@@ -1,50 +1,74 @@
-var Config = require('./config');
-var DB = require('./base/db');
+var DB = require('./base/db/api');
 var Handler = require('./base/handler');
 var Logger = require('./base/logger')(module);
 
 function addEvent(req, res){
     Logger.info('addEvent!');
-    // mongo.Db.connect(mongoUri, function (err, db) {
-    //     db.collection('events', function(er, collection) {
-    //         collection.find().toArray(function(err, items) {
-    //             res.send(items);
-    //             db.close();
-    //         });
-    //     });
-    // });
-    res.send({'rescode': 1});
-}
-
-function addSubscriber(req, res){
-    Logger.info('addSubscriber!');
     // check parameters
-    if (!req.body || !req.body.event || !req.body.callback){
-        Handler.error('Incorrect parameters! Body must have `event` and `callback`');
+    if (!req.body || !req.body.event || !req.body.data){
+        Handler.error(res, 'Incorrect parameters! Body must have `event` and `data`');
     }
     // add to db
-    DB.addSubscriber(
+    DB.event.add(
         {
             event: req.body.event,
-            callback: req.body.callback
+            data: req.body.data,
+            sended: false
         },
         function (result){
+            // response
             res.send(result);
         });
 }
-function deleteSubscriber(req, res){
-    Logger.info('deleteSubscriber!');
+
+function addSubscribe(req, res){
+    Logger.info('addSubscribe!');
     // check parameters
     if (!req.body || !req.body.event || !req.body.callback){
-        Handler.error('Incorrect parameters! Body must have `event` and `callback`');
+        Handler.error(res, 'Incorrect parameters! Body must have `event` and `callback`');
     }
-    // delete to db
-    DB.deleteSubscriber(
+    // add to db
+    DB.subscriber.add(
         {
             event: req.body.event,
             callback: req.body.callback
         },
         function (result){
+            // response
+            res.send(result);
+        });
+}
+function deleteSubscribe(req, res){
+    Logger.info('deleteSubscribe!');
+    // check parameters
+    if (!req.body || !req.body.event || !req.body.callback){
+        Handler.error(res, 'Incorrect parameters! Body must have `event` and `callback`');
+    }
+    // delete to db
+    DB.subscriber.remove(
+        {
+            event: req.body.event,
+            callback: req.body.callback
+        },
+        function (result){
+            // response
+            res.send(result);
+        });
+}
+function deleteEvent(req, res){
+    Logger.info('deleteEvent!');
+    // check parameters
+    if (!req.body || !req.body.event || !req.body.data){
+        Handler.error(res, 'Incorrect parameters! Body must have `event` and `data`');
+    }
+    // delete to db
+    DB.event.remove(
+        {
+            event: req.body.event,
+            data: req.body.data
+        },
+        function (result){
+            // response
             res.send(result);
         });
 }
@@ -52,6 +76,7 @@ function deleteSubscriber(req, res){
 
 module.exports = {
     addEvent: addEvent,
-    deleteSubscriber: deleteSubscriber,
-    addSubscriber: addSubscriber
+    deleteEvent: deleteEvent,
+    addSubscribe: addSubscribe,
+    deleteSubscribe: deleteSubscribe
 };

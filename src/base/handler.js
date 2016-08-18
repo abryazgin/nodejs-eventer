@@ -1,7 +1,7 @@
 var Logger = require('./logger')(module);
 
 
-function error(message){
+function error(res, message){
     res.status(400);
     Logger.error(message);
     res.send({ error: message });
@@ -18,6 +18,7 @@ function handler404 (req, res, next){
 function handler500 (err, req, res, next){
     res.status(err.status || 500);
     Logger.error('Internal error(%d): %s',res.statusCode,err.message);
+    Logger.error(err);
     res.send({ error: err.message });
     return;
 };

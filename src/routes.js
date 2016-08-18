@@ -3,11 +3,12 @@ var Logger = require('./base/logger')(module);
 
 function register(app) {
     // Events
-    app.post('/api/events', Controller.addEvent);
+    app.post('/api/event', Controller.addEvent);
+    app.delete('/api/event', Controller.deleteEvent);
 
     // Subscribe
-    app.post('/api/subscribes', Controller.addSubscriber);
-    app.delete('/api/subscribes', Controller.deleteSubscriber);
+    app.post('/api/subscribe', Controller.addSubscribe);
+    app.delete('/api/subscribe', Controller.deleteSubscribe);
 
     // Callback
     app.post('/test/callback', function(req, res){
