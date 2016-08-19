@@ -21,9 +21,8 @@ function addEvent(eventdict, callback){
             EventModel.add(db, eventdict, function (result) {
                 callback(result);
                 delete eventdict.subscribers;
-                Logger.debug('Notify start', eventdict);
+                Logger.debug('Notify start');
                 subscribers.forEach(function(item, i, arr){
-                    Logger.debug('Notify', item);
                     Notificator.alert(eventdict,item.callback);
                 });
                 EventModel.setsended(db, eventdict, function(){
