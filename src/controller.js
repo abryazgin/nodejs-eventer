@@ -6,7 +6,7 @@ function addEvent(req, res){
     Logger.info('addEvent!');
     // check parameters
     if (!req.body || !req.body.event || !req.body.data){
-        Handler.error(res, 'Incorrect parameters! Body must have `event` and `data`');
+        return Handler.error(res, 'Incorrect parameters! Body must have `event` and `data`');
     }
     // add to db
     DB.event.add(
@@ -42,7 +42,7 @@ function deleteSubscribe(req, res){
     Logger.info('deleteSubscribe!');
     // check parameters
     if (!req.body || !req.body.event || !req.body.callback){
-        Handler.error(res, 'Incorrect parameters! Body must have `event` and `callback`');
+        return Handler.error(res, 'Incorrect parameters! Body must have `event` and `callback`');
     }
     // delete to db
     DB.subscriber.remove(
@@ -59,7 +59,7 @@ function deleteEvent(req, res){
     Logger.info('deleteEvent!');
     // check parameters
     if (!req.body || !req.body.event || !req.body.data){
-        Handler.error(res, 'Incorrect parameters! Body must have `event` and `data`');
+        return Handler.error(res, 'Incorrect parameters! Body must have `event` and `data`');
     }
     // delete to db
     DB.event.remove(
