@@ -11,6 +11,9 @@ var app = express();
 var port = Config.port;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: false
+}));
 
 Routes(app);
 

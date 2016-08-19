@@ -6,10 +6,10 @@ function alert(eventdict, callback){
         .then(function(response) {
             var body = response.getBody();
             return (body && body.result == 1) ? 1 : 0;
-        }
+        })
         .catch(function(error){
             return -1;
-        }));
+        });
 }
 
 

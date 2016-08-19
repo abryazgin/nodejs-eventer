@@ -1,15 +1,14 @@
 
-
 module.exports = function(config) {
-    var CookSubsribe = require('./../utils/cook/cook_subscribe')(config);
+    var CookSubscribe = require('./../utils/cook/cook_subscribe')(config);
 
     describe('Creating and deleting', function () {
         it('After creating must exists in DB', function test(done) {
-            var sub = CookSubsribe.get_random_sub();
+            var sub = CookSubscribe.get_random_sub();
 
-            return CookSubsribe.create_sub(
+            return CookSubscribe.create_sub(
                 sub,
-                CookSubsribe.delete_sub(
+                CookSubscribe.delete_sub(
                     sub,
                     done
                 )
@@ -17,15 +16,15 @@ module.exports = function(config) {
         });
 
         it('Duplicate creating is possibly', function test(done) {
-            var sub = CookSubsribe.get_random_sub();
+            var sub = CookSubscribe.get_random_sub();
 
-            return CookSubsribe.create_sub(
+            return CookSubscribe.create_sub(
                 sub,
-                CookSubsribe.create_sub(
+                CookSubscribe.create_sub(
                     sub,
-                    CookSubsribe.create_sub(
+                    CookSubscribe.create_sub(
                         sub,
-                        CookSubsribe.delete_sub(
+                        CookSubscribe.delete_sub(
                             sub,
                             done
                         )

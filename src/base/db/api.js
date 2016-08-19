@@ -19,13 +19,15 @@ function addEvent(eventdict, callback){
         SubscribeModel.list(db, {event: eventdict.event}, function(subscribers) {
             eventdict.subscribers = subscribers;
             EventModel.add(db, eventdict, function (result) {
-                db.close();
                 callback(result);
                 delete eventdict.subscribers;
                 Logger.debug('Notify start', eventdict);
                 subscribers.forEach(function(item, i, arr){
                     Logger.debug('Notify', item);
                     Notificator.alert(eventdict,item.callback);
+                });
+                EventModel.setsended(db, eventdict, function(){
+                    db.close();
                 });
             })
         });

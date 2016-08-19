@@ -74,17 +74,17 @@ module.exports = function(config) {
                 .post('/test/simple/put')
                 .expect(404, done);
         });
-        it('must responds to /test/callback', function test(done) {
+        it('must responds to /test/callback/example', function test(done) {
             request(config.server)
-                .post('/test/callback')
+                .post('/test/callback/example')
                 .send({message: 'Hello, Callback!'})
                 .expect(200, done);
         });
-        it('must responds to /test/callback by body of request', function test(done) {
+        it('must responds to /test/callback/example by body of request', function test(done) {
             var body = {message: 'Hello, Callback!'};
 
             request(config.server)
-                .post('/test/callback')
+                .post('/test/callback/example')
                 .send(body)
                 .expect(200, body)
                 .end(done);

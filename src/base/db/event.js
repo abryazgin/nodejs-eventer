@@ -11,6 +11,15 @@ function add(db, event, callback) {
     });
 }
 
+function setsended(db, event, callback) {
+    Logger.debug('Set event done', event);
+    db.collection('event').update(event, { $set: { sended : true  } } , function(err, result) {
+        assert.equal(err, null);
+        Logger.debug('Event successfully setting to done', event._id);
+        callback(result);
+    });
+}
+
 function remove(db, subscribedict, callback) {
     Logger.debug('Deleting event', subscribedict);
     db.collection('event').remove(subscribedict, function(err, result) {
@@ -39,6 +48,7 @@ function list(db, subscribedict, callback) {
 
 module.exports = {
     add: add,
+    setsended: setsended,
     remove: remove,
     list: list
 };

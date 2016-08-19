@@ -22,10 +22,10 @@ function addEvent(req, res){
 }
 
 function addSubscribe(req, res){
-    Logger.info('addSubscribe!');
+    Logger.info('addSubscribe!', req.body);
     // check parameters
     if (!req.body || !req.body.event || !req.body.callback){
-        Handler.error(res, 'Incorrect parameters! Body must have `event` and `callback`');
+        return Handler.error(res, 'Incorrect parameters! Body must have `event` and `callback`');
     }
     // add to db
     DB.subscriber.add(

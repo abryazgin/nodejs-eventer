@@ -2,8 +2,8 @@ var assert = require('assert');
 var request = require('supertest');
 
 var testEvent = require('./server/test_event');
-var testSub = require('./server/test_event');
-var testHTTPtypes = require('./server/test_event');
+var testSub = require('./server/test_subscribe');
+var testHTTPtypes = require('./server/test_http_req_types');
 
 describe('API', function() {
     var config = {};
@@ -16,8 +16,8 @@ describe('API', function() {
         config.server.close();
     });
 
-    describe('Event', testEvent(config));
-    describe('Subsribe', testSub(config));
-    describe('Different HTTPtype request', testHTTPtypes(config));
+    describe('Event', function(){testEvent(config)});
+    describe('Subsribe', function(){testSub(config)});
+    describe('Different HTTPtype request', function(){testHTTPtypes(config)});
 
 });

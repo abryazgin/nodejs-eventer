@@ -11,9 +11,10 @@ function register(app) {
     app.delete('/api/subscribe', Controller.deleteSubscribe);
 
     // Callback
-    app.post('/test/callback', function(req, res){
+    app.post('/test/callback/:id', function(req, res){
         var response = req.body;
-        Logger.info('/test/callback', response);
+        var msg = req.params.id;
+        Logger.info('/test/callback', msg, response);
         res.send(response);
     });
 
@@ -29,6 +30,8 @@ function register(app) {
     app.get('/test/ErrorExample', function (req, res, next) {
         next(new Error('Random error!'));
     });
+
+    
 }
 
 module.exports = register;
