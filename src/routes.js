@@ -9,6 +9,10 @@ function register(app) {
     // Subscribe
     app.post('/api/subscribe', Controller.addSubscribe);
     app.delete('/api/subscribe', Controller.deleteSubscribe);
+    
+    app.get('/api/ping', function (req, res) {
+        res.send('Pong\n');
+    });
 
     // Callback
     app.post('/test/callback/:id', function(req, res){
